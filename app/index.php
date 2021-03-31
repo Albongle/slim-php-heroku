@@ -9,7 +9,7 @@
 <body>
 <form method="POST" action="index.php">
         <input type="text" required placeholder="Mail" name="mail"><br>
-        <input type="text" required placeholder="Clave" name="clave"><br><br><br>
+        <input type="password" required placeholder="Clave" name="clave"><br><br><br>
         <input  type="submit" value="Validar Usuario">
 </form>
     
@@ -43,27 +43,27 @@ if (isset($_POST['mail']) && isset($_POST['clave'])) {
     $listadoUsuarios = Usuario::LeerArchivoCSV("registro.csv");
     //var_dump($listadoUsuarios);
     $resultado = $usuario->ValidarUsuario($listadoUsuarios);
-    echo "Usuario Solicitado: ", $usuario->ToString()."\n<br>";
+    echo "Usuario Solicitado: ", $usuario->ToString()."\n";
     switch ($resultado) {
         case -1:
             {
-                echo "Usuario no registrado\n>";
+                echo "</br>Usuario no registrado\n>";
                 break;
             }
         case 0:
             {
-                echo "Error en los datos\n";
+                echo "</br>Error en los datos\n";
                 break;
             }
         default:
             {
-                echo "Verificado\n";
+                echo "</br>Verificado\n";
                 break;
             }
     }
     //var_dump($resultado);
 } else {
-    echo "Algun dato es invalido";
+    echo "</br></br>Algun dato es invalido";
 }
 
 ?>
