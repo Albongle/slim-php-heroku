@@ -43,7 +43,7 @@ if (isset($_POST['mail']) && isset($_POST['clave'])) {
     $listadoUsuarios = Usuario::LeerArchivoCSV("registro.csv");
     //var_dump($listadoUsuarios);
     $resultado = $usuario->ValidarUsuario($listadoUsuarios);
-    echo "Usuario Solicitado: ", $usuario->ToString()."\n";
+    echo "Usuario Solicitado: ", $usuario->ToString()."\n<br>";
     switch ($resultado) {
         case -1:
             {
