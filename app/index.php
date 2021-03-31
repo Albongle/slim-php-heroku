@@ -47,7 +47,7 @@ if (isset($_POST['mail']) && isset($_POST['clave'])) {
     switch ($resultado) {
         case -1:
             {
-                echo "</br>Usuario no registrado\n>";
+                echo "</br>Usuario no registrado\n";
                 break;
             }
         case 0:
