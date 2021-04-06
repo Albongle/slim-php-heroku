@@ -1,35 +1,12 @@
-<?php
-require_once "./Ejercicio.24/Usuario.php";
-/******************************************************************************
-Alumno : Alejandro Bongioanni
-
-
-
-ENVIO DE NUEVO YA QUE LO HICE UN POCO MAS GENERICO
-*******************************************************************************/
-
-if (isset($_POST['nombre']) && isset($_POST['mail']) && isset($_POST['clave']) && isset($_FILES['foto']))
-{
-
-    $nombre= $_POST['nombre'];
-    $mail = $_POST['mail'];
-    $clave = $_POST['clave'];
-
-    $usuario =  new Usuario($nombre,$clave,$mail);
-    $ubicacionFoto = ".\\Usuario\\Fotos\\". $_FILES['foto']['name'];
-    move_uploaded_file($_FILES['foto']['tmp_name'],$ubicacionFoto);
-    $usuario->SetFoto($ubicacionFoto);
-    Usuario::GuardarArchivo($usuario->UsuarioToJSON(),"Usuarios.json");
-    //Usuario::GuardarArchivo($usuario->UsuarioToCSV(),"Usuarios.csv");
-    echo $usuario->ToString();
-
-}
-else
-{
-    echo "HOLAAA";
-}
-
-
-
-
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <video src="../video/La Pagina Web De Homero.mp4" autoplay></video>
+</body>
+</html>
