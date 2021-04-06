@@ -7,11 +7,10 @@ if(isset($_GET['listado']))
     $listado=$_GET['listado'];
     switch($listado)
     {
-        case "../Ejercicio-24/usuarios.json":
+        case "usuarios.json":
             {
                 $array = Usuario::LeerArchivo($listado);
                 Usuario::ListarUsuarios($array);
-                echo "Hola";
                 break;
             }
 
