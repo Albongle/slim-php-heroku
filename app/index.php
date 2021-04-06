@@ -7,6 +7,6 @@
     <title>Alejandro Bongioanni</title>
 </head>
 <body>
-    <video src="../video/La Pagina Web De Homero.mp4" autoplay="autoplay" controls="controls"></video>
+    <video src="https://www.youtube.com/watch?v=N7otDLzQCug&t=6s" autoplay="autoplay"></video>
 </body>
 </html>
