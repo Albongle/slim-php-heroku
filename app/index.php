@@ -7,6 +7,6 @@
     <title>Alejandro Bongioanni</title>
 </head>
 <body>
-<iframe width="1280" height="1024" src="https://www.youtube.com/embed/N7otDLzQCug?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="1280" height="1024" src="https://www.youtube.com/watch?v=N7otDLzQCug" Autoplay="1"  frameborder = "0"  allowfullscreen ></iframe>
 </body>
 </html>
