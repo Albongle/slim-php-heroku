@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Alejandro Bongioanni</title>
 </head>
 <body>
-    <video src="../video/La Pagina Web De Homero.mp4" autoplay></video>
+    <video src="../video/La Pagina Web De Homero.mp4" autoplay="autoplay" controls="controls"></video>
 </body>
 </html>
