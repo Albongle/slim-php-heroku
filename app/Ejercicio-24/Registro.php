@@ -1,5 +1,5 @@
 <?php
-require_once "./Ejercicio.24/Usuario.php";
+require_once "Usuario.php";
 /******************************************************************************
 Alumno : Alejandro Bongioanni
 
@@ -7,6 +7,8 @@ Alumno : Alejandro Bongioanni
 
 ENVIO DE NUEVO YA QUE LO HICE UN POCO MAS GENERICO
 *******************************************************************************/
+
+
 
 if (isset($_POST['nombre']) && isset($_POST['mail']) && isset($_POST['clave']) && isset($_FILES['foto']))
 {
@@ -23,10 +25,6 @@ if (isset($_POST['nombre']) && isset($_POST['mail']) && isset($_POST['clave']) &
     //Usuario::GuardarArchivo($usuario->UsuarioToCSV(),"Usuarios.csv");
     echo $usuario->ToString();
 
-}
-else
-{
-    echo "HOLAAA";
 }
 
 
