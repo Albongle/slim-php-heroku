@@ -7,7 +7,7 @@ if(isset($_GET['listado']))
     $listado=$_GET['listado'];
     switch($listado)
     {
-        case "Usuarios":
+        case "Usuarios.json":
             {
                 $array = Usuario::LeerArchivo($listado);
                 Usuario::ListarUsuarios($array);
