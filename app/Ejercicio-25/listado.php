@@ -11,6 +11,7 @@ if(isset($_GET['listado']))
             {
                 $array = Usuario::LeerArchivo($listado);
                 Usuario::ListarUsuarios($array);
+                echo "Hola";
                 break;
             }
 

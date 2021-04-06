@@ -208,7 +208,7 @@ class Usuario{
     /**
      * Metodo que recibe un array de objetos y genera un listado HTML realizando el ToString de este.
      * @$array es el array de datos a imprimir en formato tabla
-     * @return devuele una lista desordenada por patalla con todos los datos del usuario 
+     * @return devuelve una lista desordenada por patalla con todos los datos del usuario 
      */
     public static function ListarUsuarios($array)
     {
