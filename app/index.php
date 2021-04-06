@@ -26,7 +26,7 @@ if (isset($_POST['nombre']) && isset($_POST['mail']) && isset($_POST['clave']) &
 }
 else
 {
-    echo HOLAAA;
+    echo "HOLAAA";
 }
 
 
