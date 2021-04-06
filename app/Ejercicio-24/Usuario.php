@@ -75,7 +75,7 @@ class Usuario{
         if(isset($archivo))
         {
             if(!fclose($archivo)){
-                echo "Algo salio mal al cerrar";
+                echo "Algo salio mal al cerrar\n";
             }
         }
         return $returnAux;
@@ -89,17 +89,17 @@ class Usuario{
             $archivo=fopen($ruta, "w");
             if(fwrite($archivo,$dato)>0)
             {
-                echo "Se guardo el registro de ultimo ID";
+                echo "Se guardo el registro de ultimo ID\n";
                 $returnAux=true;
             }
             else
             {
-                echo "Algo salio mal al escribir ultimo ID"; 
+                echo "Algo salio mal al escribir ultimo ID\n"; 
             }
             if(isset($archivo))
             {
                 if(!fclose($archivo)){
-                    echo "Algo salio mal al cerrar registro ultimo ID";
+                    echo "Algo salio mal al cerrar registro ultimo ID\n";
                 }
             }
             return $returnAux;
@@ -113,17 +113,17 @@ class Usuario{
             $archivo=fopen($ruta, "a");
             if(fwrite($archivo,$dato)>0)
             {
-                echo "Se guardo el registro";
+                echo "Se guardo el registro\n";
                 $returnAux=true;
             }
             else
             {
-                echo "Algo salio mal al escribir"; 
+                echo "Algo salio mal al escribir\n"; 
             }
             if(isset($archivo))
             {
                 if(!fclose($archivo)){
-                    echo "Algo salio mal al cerrar";
+                    echo "Algo salio mal al cerrar\n";
                 }
             }
         }
@@ -146,7 +146,7 @@ class Usuario{
         if(isset($archivo))
         {
             if(!fclose($archivo)){
-                echo "Algo salio mal al cerrar CSV";
+                echo "Algo salio mal al cerrar CSV\n";
             }
         }
         return $returnArray;
@@ -169,7 +169,7 @@ class Usuario{
             if(isset($archivo))
             {
                 if(!fclose($archivo)){
-                    echo "Algo salio mal al cerrar JSON";
+                    echo "Algo salio mal al cerrar JSON\n";
                 }
             }
         }
