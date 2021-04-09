@@ -2,15 +2,20 @@
 
 require_once "Usuario.php";
 
-if(isset($_GET['listado']))
+
+$array = Usuario::LeerArchivo("../Ejercicio-24/usuarios.json");
+Usuario::ListarUsuarios($array);
+
+/**if(isset($_GET['listado']))
 {
     $listado=$_GET['listado'];
     switch($listado)
     {
-        case "usuarios.json":
+        case "../Ejercicio-24/usuarios.json":
             {
                 $array = Usuario::LeerArchivo($listado);
                 Usuario::ListarUsuarios($array);
+                echo "Hola";
                 break;
             }
 
@@ -25,7 +30,7 @@ if(isset($_GET['listado']))
 else
 {
     echo "Algun dato es invalido";
-}
+}*/
 
 
 

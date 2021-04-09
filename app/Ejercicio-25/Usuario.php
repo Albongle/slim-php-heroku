@@ -63,7 +63,7 @@ class Usuario{
         $returnAux=-1;
         if(isset($ruta) && is_string($ruta))
         {
-            if (($archivo=fopen($ruta, "r"))) 
+            if (($archivo=fopen($ruta,"r"))) 
             {
                 $returnAux=0;
                 if(($dato = fread($archivo,1024))>=0)

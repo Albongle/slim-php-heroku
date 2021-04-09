@@ -10,19 +10,16 @@ class Usuario{
     private $foto;
     private $fechaRegistro;
     private int $id;
+    private static $rutaId = "./Usuario/ultimoidusuarios.txt";
 
 
-    public function __construct(string $nombre, string $clave, string $mail)
+    public function __construct(int $id,string $nombre, string $clave, string $mail, string $rutaFoto ="")
     {
-        $ruta = "ultimoId.txt";
-        $this->nombre=$nombre;
-        $this->clave=$clave;
-        $this->mail=$mail;
-        if(($idAux=self::LeerUltimoID($ruta))>=0)
-        {
-            $this->id = ($idAux + 1);
-            self::EscribirUltimoID($ruta, $this->id);
-        }
+        $this->SetNombre($nombre);
+        $this->SetClave($clave);
+        $this->SetMail($mail);
+        $this->SetId($id);
+        $this->SetFoto($rutaFoto);
         $this->fechaRegistro = date("d-M-Y");
     }
 
@@ -30,27 +27,67 @@ class Usuario{
     {
         return $this->nombre;
     }
+    private function SetNombre(string $nombre)
+    {
+        if(isset($nombre) && is_string($nombre) && preg_match("/^[A-Za-z]{3,20}\ ?+[A-Za-z]{0,20}$/",$nombre)){
+            $this->nombre = $nombre;
+        }
+        else{
+            echo "Nombre Invalido\n";
+        }
+    }
     public function GetClave()
     {
         return $this->clave;
+    }
+    private function SetClave(string $clave)
+    {
+        if(isset($clave) && is_string($clave)){
+            $this->clave = $clave;
+        }
+        else{
+            echo "Clave Invalido\n";
+        }
     }
     public function GetMail()
     {
         return $this->mail;
     }
+    private function SetMail(string $mail)
+    {
+        if(isset($mail) && is_string($mail)){
+            $this->mail = $mail;
+        }
+        else{
+            echo "Mail Invalido\n";
+        }
+    }
+    
     public function GetId()
     {
         return $this->id;
+    }
+    private function SetId($id)
+    {
+        if(isset($id) && is_int($id)){
+            $this->id = $id;
+            self::EscribirUltimoID(self::$rutaId,$id);
+        }else{
+            echo "ID invalido\n";
+        }
     }
     public function GetFoto()
     {
         return $this->foto;
     }
-    public function SetFoto($foto)
+    private function SetFoto($foto)
     {
-        if(isset($foto))
+        if(isset($foto) && is_string($foto))
         {
             $this->foto = $foto;
+        }
+        else{
+            echo "Foto Invalida\n";
         }
     }
     public function GetFechaRegistro()
@@ -63,7 +100,7 @@ class Usuario{
         $returnAux=-1;
         if(isset($ruta) && is_string($ruta))
         {
-            if (($archivo=fopen($ruta, "r"))) 
+            if (($archivo=fopen($ruta,"r"))) 
             {
                 $returnAux=0;
                 if(($dato = fread($archivo,1024))>=0)
@@ -75,7 +112,7 @@ class Usuario{
         if(isset($archivo))
         {
             if(!fclose($archivo)){
-                echo "Algo salio mal al cerrar";
+                echo "Algo salio mal al cerrar\n";
             }
         }
         return $returnAux;
@@ -89,17 +126,16 @@ class Usuario{
             $archivo=fopen($ruta, "w");
             if(fwrite($archivo,$dato)>0)
             {
-                echo "Se guardo el registro de ultimo ID";
                 $returnAux=true;
             }
             else
             {
-                echo "Algo salio mal al escribir ultimo ID"; 
+                echo "Algo salio mal al escribir ultimo ID\n"; 
             }
             if(isset($archivo))
             {
                 if(!fclose($archivo)){
-                    echo "Algo salio mal al cerrar registro ultimo ID";
+                    echo "Algo salio mal al cerrar registro ultimo ID\n";
                 }
             }
             return $returnAux;
@@ -113,17 +149,17 @@ class Usuario{
             $archivo=fopen($ruta, "a");
             if(fwrite($archivo,$dato)>0)
             {
-                echo "Se guardo el registro";
+                echo "Se guardo el registro\n";
                 $returnAux=true;
             }
             else
             {
-                echo "Algo salio mal al escribir"; 
+                echo "Algo salio mal al escribir\n"; 
             }
             if(isset($archivo))
             {
                 if(!fclose($archivo)){
-                    echo "Algo salio mal al cerrar";
+                    echo "Algo salio mal al cerrar\n";
                 }
             }
         }
@@ -139,14 +175,14 @@ class Usuario{
             {
                 while (($datosUsuario = fgetcsv($archivo))) 
                 {
-                    array_push($returnArray,new Usuario($datosUsuario[1],$datosUsuario[2],$datosUsuario[3]));
+                    array_push($returnArray,new Usuario($datosUsuario[0],$datosUsuario[1],$datosUsuario[2],$datosUsuario[3],$datosUsuario[4]));
                 }
             }
         }
         if(isset($archivo))
         {
             if(!fclose($archivo)){
-                echo "Algo salio mal al cerrar CSV";
+                echo "Algo salio mal al cerrar CSV\n";
             }
         }
         return $returnArray;
@@ -161,15 +197,15 @@ class Usuario{
                 while (($datosUsuario = fgets($archivo))) 
                 {
                     $datosUsuario=json_decode($datosUsuario);
-                    $usuario = new Usuario($datosUsuario->nombre, $datosUsuario->clave,$datosUsuario->mail);
-                    $usuario->SetFoto($datosUsuario->foto);
+                    $usuario = new Usuario($datosUsuario->id,$datosUsuario->nombre, $datosUsuario->clave,$datosUsuario->mail,$datosUsuario->foto);
+                    $usuario->fechaRegistro = $datosUsuario->fechaRegistro;
                     array_push($returnArray,$usuario);
                 }
             }
             if(isset($archivo))
             {
                 if(!fclose($archivo)){
-                    echo "Algo salio mal al cerrar JSON";
+                    echo "Algo salio mal al cerrar JSON\n";
                 }
             }
         }
@@ -208,7 +244,7 @@ class Usuario{
     /**
      * Metodo que recibe un array de objetos y genera un listado HTML realizando el ToString de este.
      * @$array es el array de datos a imprimir en formato tabla
-     * @return devuele una lista desordenada por patalla con todos los datos del usuario 
+     * @return devuelve una lista desordenada por patalla con todos los datos del usuario 
      */
     public static function ListarUsuarios($array)
     {
@@ -277,18 +313,20 @@ class Usuario{
     }
 
     /**
+     * Comprueba la existencia de un usuario dentro de un Array
      * @var $array Es el array donde se va a verificar si existe el usuario de instancia
-     * @return devuelve -1 si el mail no existe, 0 si no coincide la clave y 1 si esta OK
+     * @return devuelve -1 si el usuario no existe, la posicion del array de lo contrario
     */
     public Function ValidarUsuario($array)
     {
         $returnAux = -1;
         if(isset($array) && is_array($array))
         {
-            foreach ($array as $value) 
+            foreach ($array as $key=> $value) 
             {
-                if(($returnAux = $this->Equals($value)) == 1)
+                if($this->Equals($value))
                 {
+                    $returnAux = $key;
                     break;  
                 }
             }
@@ -297,28 +335,42 @@ class Usuario{
     }
 
     /**
+     * Compara dos usuarios mediante su ID
      * @var $usuario Es el Usuatio a validar
-     * @return devuelve -1 si el mail no existe, 0 si no coincide la clave y 1 si esta OK
+     * @return devuelve True si ambos ID coinciden, False de lo contrario
     */
     public function Equals(Usuario $usuario)
     {
-        $returnAux = -1;
+        $returnAux = false;
         if(isset($usuario) && is_a($usuario,"Usuario"))
         {
-            if($usuario->mail == $this->mail)
+            if($usuario->GetId() == $this->GetId())
             {
-                if($usuario->clave == $this->clave)
-                {
-                    $returnAux=1;
-                }
-                else
-                {
-                    $returnAux=0;
+                $returnAux = true;
+            }
+        }
+        return $returnAux;
+    }
+    /**
+     * Comprueba si dentro de un array de usuarios se encuentra contenido el usuarios con un determinado ID
+     * @var $idUsuario Es el Id a verificar
+     * @var $arrayUsuarios Es el array de usuarios donde se va a buscar el ID
+     * @return devuelve -1 si el ID no esta contenido, de lo contrario el Usuario en cuestion
+     */
+    public static function ValidaIdEnArray(int $idUsuario, $arrayUsuarios)
+    {
+        $returnAux = -1;
+        if(isset($idUsuario) && is_int($idUsuario) && isset($arrayUsuarios) && is_array($arrayUsuarios)){
+            foreach ($arrayUsuarios as $key => $value) {
+                if($value->GetId()== $idUsuario){
+                    $returnAux = new Usuario($value->GetId(),$value->GetNombre(),$value->GetClave(),$value->GetMail(),$value->GetFoto());
+                    break;
                 }
             }
         }
         return $returnAux;
     }
+
 }
 
 ?>
