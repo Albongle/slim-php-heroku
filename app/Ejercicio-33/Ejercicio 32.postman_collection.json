@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "6c40acd8-7f4f-45bc-a29d-4125e84f8abd",
+		"name": "Ejercicio 32",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST Ej 32",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Deloris",
+							"type": "text"
+						},
+						{
+							"key": "claveVieja",
+							"value": "9012",
+							"type": "text"
+						},
+						{
+							"key": "claveNueva",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "mail",
+							"value": "bsharpe2@wisc.edu",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/Programacion-III/Ejercicios/Ejercicio-33/index.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Programacion-III",
+						"Ejercicios",
+						"Ejercicio-33",
+						"index.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
